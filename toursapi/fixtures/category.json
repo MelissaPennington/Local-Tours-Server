@@ -1,0 +1,16 @@
+[
+    {
+        "model": "toursapi.category",
+        "pk": 1,
+        "fields": {
+            "name": "Adventure"
+        }
+    },
+    {
+      "model": "toursapi.category",
+      "pk": 2,
+      "fields": {
+          "name": "Cultural"
+      }
+    }
+]
