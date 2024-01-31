@@ -19,6 +19,23 @@ class UserView(ViewSet):
         except User.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
+    def update(self, request, pk):
+        """Handle PUT requests for an tour
+        Returns: Response -- Empty body with 204 status code"""
+
+        try:
+            user = User.objects.get(pk=pk)
+            user.name = request.data["name"]
+            user.bio = request.data["bio"]
+
+            user.save()
+
+            return Response(None, status=status.HTTP_204_NO_CONTENT)
+        except user.DoesNotExist:
+            return Response({'message': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'message': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
     def list(self, request):
         """Handle GET requests for all users
         
