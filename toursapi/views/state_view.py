@@ -6,18 +6,18 @@ from toursapi.models import State
 
 
 class StateView(ViewSet):
-    """item view"""
+    """state view"""
 
     def retrieve(self, request, pk):
-        """Handle GET requests for single item.
-        Returns: Response -- JSON serialized item"""
+        """Handle GET requests for single state.
+        Returns: Response -- JSON serialized state"""
 
         try:
             item = State.objects.get(pk=pk)
-            serializer = ItemSerializer(item)
+            serializer = StateSerializer(item)
             return Response(serializer.data)
         except State.DoesNotExist:
-            return Response({'message': 'Item not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': 'State not found'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({'message': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -26,15 +26,15 @@ class StateView(ViewSet):
         Returns: Response -- JSON serialized list of items"""
 
         try:
-            state = State.objects.all()
+            states = State.objects.all()
             serializer = StateSerializer(states, many=True)
             return Response(serializer.data)
         except Exception as e:
             return Response({'message': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class ItemSerializer(serializers.ModelSerializer):
-    """JSON serializer for items"""
+class StateSerializer(serializers.ModelSerializer):
+    """JSON serializer for states"""
     class Meta:
         model = State
         fields = ('id', 'name')
