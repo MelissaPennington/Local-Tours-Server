@@ -81,7 +81,7 @@ class TourView(ViewSet):
         Returns: Response -- Empty body with 204 status code"""
 
         try:
-            tour = tour.objects.get(pk=pk)
+            tour = Tour.objects.get(pk=pk)
             tour.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except tour.DoesNotExist:
