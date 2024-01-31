@@ -1,0 +1,18 @@
+[
+  {
+      "model": "toursapi.tourcategory",
+      "pk": 1,
+      "fields": {
+          "category": 1,  
+          "tour": 1     
+      }
+  },
+  {
+    "model": "toursapi.tourcategory",
+    "pk": 2,
+    "fields": {
+        "category": 2, 
+        "tour": 2
+    }
+}
+]

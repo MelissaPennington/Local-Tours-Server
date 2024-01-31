@@ -1,0 +1,28 @@
+[
+    {
+        "model": "toursapi.tour",
+        "pk": 1,
+        "fields": {
+            "name": "Taste the Tour",
+            "description": "A wonderful tour experience",
+            "price": "100.00",
+            "address": "123 Main Street, Cityville",
+            "user": 1,  
+            "image": "path/to/image1.jpg",
+            "state": 1
+        }
+    },
+    {
+      "model": "toursapi.tour",
+      "pk": 2,
+      "fields": {
+          "name": "Tour Example 2",
+          "description": "Explore the beauty of nature",
+          "price": "75.50",
+          "address": "456 Park Avenue, Townsville",
+          "user": 2, 
+          "image": "path/to/image2.jpg",
+          "state": 2
+      }
+  }
+]
