@@ -3,7 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import action
-from toursapi.models import Tour, User, Category, TourCategory
+from toursapi.models import Tour, User, Category, TourCategory, State
 # from tourspapi.views.tour_category_view import TourCategorySerializer
 
 
@@ -39,6 +39,8 @@ class TourView(ViewSet):
         try:
             user = User.objects.get(id=request.data["user"])
 
+            state = State.objects.get(id=request.data["state"])
+
             tour = Tour.objects.create(
                 user=user,
                 name=request.data["name"],
@@ -46,7 +48,7 @@ class TourView(ViewSet):
                 price=request.data["price"],
                 address=request.data["address"],
                 image=request.data["image"],
-                state=request.data["state"],
+                state=state,
             )
             serializer = TourSerializer(tour)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -59,6 +61,8 @@ class TourView(ViewSet):
         """Handle PUT requests for an tour
         Returns: Response -- Empty body with 204 status code"""
 
+        state = State.objects.get(id=request.data["state"])
+
         try:
             tour = Tour.objects.get(pk=pk)
             tour.name = request.data["name"]
@@ -66,7 +70,7 @@ class TourView(ViewSet):
             tour.price = request.data["price"]
             tour.address = request.data["address"]
             tour.image = request.data["image"]
-            tour.state = request.data["state"]
+            tour.state = state
 
             tour.save()
 
@@ -97,17 +101,17 @@ class TourView(ViewSet):
         """Post request for a user to add an item to an tour"""
         try:
             # item = Item.objects.get(pk=request.data["item"])
-            tourcategory = TourCategory.objects.get(pk=category_id)
+            tourcategory = Category.objects.get(pk=category_id)
             tour = Tour.objects.get(pk=pk)
 
             tourcategory = TourCategory.objects.create(category=tourcategory, tour=tour)
             return Response({'message': 'Category added to tour'}, status=status.HTTP_201_CREATED)
         except Category.DoesNotExist:
-            return Response({'error': 'Item not found.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Tour not found.'}, status=status.HTTP_404_NOT_FOUND)
         except tour.DoesNotExist:
             return Response({'error': 'tour not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-    @action(methods=['delete'], detail=True)
+    @action(methods=['get'], detail=True)
     def remove_tour_category(self, request, pk, tour_category=None):
         """Delete request for a user to remove an item from an tour"""
         try:
@@ -130,17 +134,35 @@ class TourView(ViewSet):
     #     return Response("tour item removed", status=status.HTTP_204_NO_CONTENT)
 
 
-class TourCategorySerializer(serializers.ModelSerializer):
+# class TourCategorySerializer(serializers.ModelSerializer):
     
+#     class Meta:
+#         model = TourCategory
+#         fields = ('id', 'name')
+#         depth = 1
+
+class CategorySerializer(serializers.ModelSerializer):
+    """JSON serializer for categories"""
     class Meta:
-        model = TourCategory
+        model = Category
         fields = ('id', 'name')
         depth = 1
 class TourSerializer(serializers.ModelSerializer):
     """JSON serializer for tours"""
-    categories = TourCategorySerializer(many=True, read_only=True)
+    categories = serializers.SerializerMethodField()
     
     class Meta:
         model = Tour
         fields = ('id', 'categories', 'user', 'name', 'description', 'price', 'address', 'image', 'state')
         depth = 1
+    
+    def get_categories(self, obj):
+        tour_categories = TourCategory.objects.all().filter(tour=obj)
+        category_list = [tour_categories.category for tour_categories in tour_categories]
+        serializer = CategorySerializer(category_list, many=True)
+    
+        if len(category_list) > 0:
+            return serializer.data
+        else:
+            return []
+        

@@ -20,7 +20,7 @@
           "description": "Explore the beauty of nature",
           "price": "75.50",
           "address": "456 Park Avenue, Townsville",
-          "user": 2, 
+          "user": 1, 
           "image": "path/to/image2.jpg",
           "state": 2
       }

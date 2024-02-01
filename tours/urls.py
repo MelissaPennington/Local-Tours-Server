@@ -16,20 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from toursapi.views import CategoryView, TourView, UserView, check_user, register_user
+from django.conf.urls import include
+from toursapi.views import CategoryView, TourView, UserView, StateView, check_user, register_user
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'categories', CategoryView, 'category')
-router.register(r'tour categories', TourCategoryView, 'tourcategory')
 router.register(r'tours', TourView, 'tour')
 router.register(r'users', UserView, 'user')
+router.register(r'states', StateView, 'state')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('checkuser', check_user),
     path('register', register_user),
-    path('tours/<int:pk>/add_tour_category/<int:category_id>/',
-         TourView.as_view({'post': 'add_tour_category'}), name='tour-add-category-tour'),
+    path('', include(router.urls)),
+    path('tours/<int:pk>/add_tour_category/<int:category_id>',
+         TourView.as_view({'post': 'add_tour_category'}), name='tour-add-tour-category'),
     path('tours/<int:pk>/remove_tour_category/<int:tour_category>/',
-         TourView.as_view({'delete': 'remove_tour_category'}), name='tour-remove-tour-category')
+         TourView.as_view({'get': 'remove_tour_category'}), name='tour-remove-tour-category')
 ]
