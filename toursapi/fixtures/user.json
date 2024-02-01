@@ -1,0 +1,18 @@
+[
+  {
+      "model": "toursapi.user",
+      "pk": 1,
+      "fields": {
+          "username": "Melanie",
+          "bio": "Level 31"
+      }
+  }, 
+  {
+    "model": "toursapi.user",
+    "pk": 2,
+    "fields": {
+        "username": "Brayden",
+        "bio": "Level 13"
+    }
+}
+]
