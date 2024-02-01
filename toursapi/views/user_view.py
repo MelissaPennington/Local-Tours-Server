@@ -25,7 +25,7 @@ class UserView(ViewSet):
 
         try:
             user = User.objects.get(pk=pk)
-            user.name = request.data["name"]
+            user.username = request.data["username"]
             user.bio = request.data["bio"]
 
             user.save()
@@ -46,15 +46,6 @@ class UserView(ViewSet):
             return Response(serializer.data)
         except User.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
-    
-    def update(self, request, pk):
-        user = User.objects.get(pk=pk)
-        user.username = request.data['username']
-        user.bio = request.data['bio']
-        user.save()
-        
-        serializer = UserSerializer(user)
-        return Response(serializer.data, status=status=status.HTTP_200_OK)
         
         
 class UserSerializer(serializers.ModelSerializer):
