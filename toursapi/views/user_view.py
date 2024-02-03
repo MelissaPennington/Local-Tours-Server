@@ -29,8 +29,8 @@ class UserView(ViewSet):
             user.bio = request.data["bio"]
 
             user.save()
-
-            return Response(None, status=status.HTTP_204_NO_CONTENT)
+            serializer = UserSerializer(user)
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
         except user.DoesNotExist:
             return Response({'message': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
