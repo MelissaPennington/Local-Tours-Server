@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import action
 from toursapi.models import Tour, User, Category, TourCategory, State
+from toursapi.views.user_view import UserSerializer
 # from tourspapi.views.tour_category_view import TourCategorySerializer
 
 
@@ -24,15 +25,43 @@ class TourView(ViewSet):
             return Response({'message': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def list(self, request):
-        """Handle GET requests to get all tours.
-        Returns: Response -- JSON serialized list of tours"""
         try:
-            tours = Tour.objects.all()
+            user_id = request.query_params.get('userId', None)
+
+            if user_id is not None:
+                user = User.objects.get(id = user_id)
+                tours = Tour.objects.filter(user_id=user)
+            else:
+                tours = Tour.objects.all()
+
             serializer = TourSerializer(tours, many=True)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         except Exception as e:
             return Response({'message': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    # def list(self, request):
+    #     """Handle GET requests to get all tours.
+    #     Returns: Response -- JSON serialized list of tours"""
+    #     try:
+    #         tours = Tour.objects.all()
+    #         serializer = TourSerializer(tours, many=True)
+    #         return Response(serializer.data)
+    #     except Exception as e:
+    #         return Response({'message': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    # def list(self, request):
+    #     tours =Tour.objects.all()
+
+    #     user = request.query_parms.get('userId', None)
+    #     tour = request.query_parms.get('tourId', None)
+
+    #     if request.query_parms.get('completed', None) is not None and user is not None:
+    #         tours = Tour.objects.filter(complete = 'True', user_id = user)
+        
+    #     serializer = TourSerializer(tours, many=True)
+    #     return Response(serializer.data, status.HTTP_200_OK)
+    
     def create(self, request):
         """Handle POST operations
         Returns Response -- JSON serialized tour instance"""
@@ -123,23 +152,6 @@ class TourView(ViewSet):
             return Response("tour item removed", status=status.HTTP_204_NO_CONTENT)
         except TourCategory.DoesNotExist:
             return Response({'error': 'tour category not found.'}, status=status.HTTP_404_NOT_FOUND)
-    
-    # @action(methods=['delete'], detail=True)
-    # def remove_tour_item(self, request, pk):
-    #     """Delete request for a user to remove an item from an tour"""
-
-    #     touritem = request.data.get("tour_item")
-    #     tourItem.objects.filter(pk=touritem, tour__pk=pk).delete()
-
-    #     return Response("tour item removed", status=status.HTTP_204_NO_CONTENT)
-
-
-# class TourCategorySerializer(serializers.ModelSerializer):
-    
-#     class Meta:
-#         model = TourCategory
-#         fields = ('id', 'name')
-#         depth = 1
 
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for categories"""
