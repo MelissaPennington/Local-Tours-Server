@@ -101,11 +101,14 @@ class TourView(ViewSet):
         """Post request for a user to add an item to an tour"""
         try:
             # item = Item.objects.get(pk=request.data["item"])
-            tourcategory = Category.objects.get(pk=category_id)
+            category = Category.objects.get(pk=category_id)
             tour = Tour.objects.get(pk=pk)
-
-            tourcategory = TourCategory.objects.create(category=tourcategory, tour=tour)
-            return Response({'message': 'Category added to tour'}, status=status.HTTP_201_CREATED)
+            existing_tour_categories = TourCategory.objects.all().filter(category=category, tour=tour)
+            if len(existing_tour_categories) > 0:
+                return Response({'message': 'Category already added to tour'}, status=status.HTTP_200_OK)
+            else:
+                TourCategory.objects.create(category=category, tour=tour)
+                return Response({'message': 'Category added to tour'}, status=status.HTTP_201_CREATED)
         except Category.DoesNotExist:
             return Response({'error': 'Tour not found.'}, status=status.HTTP_404_NOT_FOUND)
         except tour.DoesNotExist:
