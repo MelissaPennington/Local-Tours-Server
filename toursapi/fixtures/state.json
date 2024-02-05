@@ -1,16 +1,297 @@
 [
-  {
+    {
       "model": "toursapi.state",
       "pk": 1,
       "fields": {
-          "name": "California"
+        "name": "Alabama"
       }
-  }, 
-  {
-    "model": "toursapi.state",
-    "pk": 2,
-    "fields": {
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 2,
+      "fields": {
+        "name": "Alaska"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 3,
+      "fields": {
+        "name": "Arizona"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 4,
+      "fields": {
+        "name": "Arkansas"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 5,
+      "fields": {
+        "name": "California"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 6,
+      "fields": {
+        "name": "Colorado"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 7,
+      "fields": {
+        "name": "Connecticut"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 8,
+      "fields": {
+        "name": "Delaware"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 9,
+      "fields": {
+        "name": "Florida"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 10,
+      "fields": {
+        "name": "Georgia"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 11,
+      "fields": {
+        "name": "Hawaii"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 12,
+      "fields": {
+        "name": "Idaho"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 13,
+      "fields": {
+        "name": "Illinois"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 14,
+      "fields": {
+        "name": "Indiana"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 15,
+      "fields": {
+        "name": "Iowa"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 16,
+      "fields": {
+        "name": "Kansas"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 17,
+      "fields": {
+        "name": "Kentucky"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 18,
+      "fields": {
+        "name": "Louisiana"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 19,
+      "fields": {
+        "name": "Maine"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 20,
+      "fields": {
+        "name": "Maryland"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 21,
+      "fields": {
+        "name": "Massachusetts"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 22,
+      "fields": {
+        "name": "Michigan"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 23,
+      "fields": {
+        "name": "Minnesota"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 24,
+      "fields": {
+        "name": "Mississippi"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 25,
+      "fields": {
+        "name": "Missouri"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 26,
+      "fields": {
+        "name": "Montana"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 27,
+      "fields": {
+        "name": "Nebraska"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 28,
+      "fields": {
+        "name": "Nevada"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 29,
+      "fields": {
+        "name": "New Hampshire"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 30,
+      "fields": {
+        "name": "New Jersey"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 31,
+      "fields": {
+        "name": "New Mexico"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 32,
+      "fields": {
         "name": "New York"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 33,
+      "fields": {
+        "name": "North Carolina"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 34,
+      "fields": {
+        "name": "North Dakota"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 35,
+      "fields": {
+        "name": "Ohio"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 36,
+      "fields": {
+        "name": "Oklahoma"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 37,
+      "fields": {
+        "name": "Oregon"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 38,
+      "fields": {
+        "name": "Pennsylvania"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 39,
+      "fields": {
+        "name": "Rhode Island"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 40,
+      "fields": {
+        "name": "South Carolina"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 41,
+      "fields": {
+        "name": "South Dakota"
+      }
+    },
+    {
+      "model": "toursapi.state",
+      "pk": 42,
+      "fields": {
+        "name": "Tennessee"
+      }
     }
-}
 ]
+  

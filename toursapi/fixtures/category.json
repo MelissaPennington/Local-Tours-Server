@@ -3,14 +3,49 @@
         "model": "toursapi.category",
         "pk": 1,
         "fields": {
-            "name": "Adventure"
+            "name": "Adventure Tours"
         }
     },
     {
       "model": "toursapi.category",
       "pk": 2,
       "fields": {
-          "name": "Cultural"
+          "name": "Art and Cultural Tours"
       }
-    }
+    },
+    {
+        "model": "toursapi.category",
+        "pk": 3,
+        "fields": {
+            "name": "Food and Wine Tours"
+        }
+      },
+      {
+        "model": "toursapi.category",
+        "pk": 4,
+        "fields": {
+            "name": "Nature and Wildlife Tours"
+        }
+      },
+      {
+        "model": "toursapi.category",
+        "pk": 5,
+        "fields": {
+            "name": "Architecture Tours"
+        }
+      },
+      {
+        "model": "toursapi.category",
+        "pk": 6,
+        "fields": {
+            "name": "Nightlife Tours"
+        }
+      },
+      {
+        "model": "toursapi.category",
+        "pk": 7,
+        "fields": {
+            "name": "Shopping Tours"
+        }
+      }
 ]
