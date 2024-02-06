@@ -150,9 +150,10 @@ class TourView(ViewSet):
             # tourcategory = tourItem.objects.get(pk=request.data.get("tour_item"), tour__pk=pk)
             tour_category_id = self.kwargs.get('tour_category')
             tourcategory = TourCategory.objects.get(pk=tour_category_id)
-
             tourcategory.delete()
-            return Response("tour item removed", status=status.HTTP_204_NO_CONTENT)
+            tour = Tour.objects.get(pk=pk)
+            serializer = TourSerializer(tour)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except TourCategory.DoesNotExist:
             return Response({'error': 'tour category not found.'}, status=status.HTTP_404_NOT_FOUND)
 
