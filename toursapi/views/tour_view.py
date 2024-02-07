@@ -143,17 +143,22 @@ class TourView(ViewSet):
         except tour.DoesNotExist:
             return Response({'error': 'tour not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-    @action(methods=['get'], detail=True)
-    def remove_tour_category(self, request, pk, tour_category=None):
+    @action(methods=['put'], detail=True)
+    def remove_tour_category(self, request, pk):
         """Delete request for a user to remove an item from an tour"""
         try:
             # tourcategory = tourItem.objects.get(pk=request.data.get("tour_item"), tour__pk=pk)
-            tour_category_id = self.kwargs.get('tour_category')
-            tourcategory = TourCategory.objects.get(pk=tour_category_id)
-            tourcategory.delete()
             tour = Tour.objects.get(pk=pk)
-            serializer = TourSerializer(tour)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            
+            category_id = request.query_params.get('categoryId', None)
+            
+            if category_id is not None:
+                category = Category.objects.get(id=category_id)
+                tour_category = TourCategory.objects.get(category=category, tour=tour)
+                tour_category.delete()
+                serializer = TourSerializer(tour)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            
         except TourCategory.DoesNotExist:
             return Response({'error': 'tour category not found.'}, status=status.HTTP_404_NOT_FOUND)
 
