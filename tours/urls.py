@@ -32,6 +32,4 @@ urlpatterns = [
     path('', include(router.urls)),
     path('tours/<int:pk>/add_tour_category/<int:category_id>',
          TourView.as_view({'post': 'add_tour_category'}), name='tour-add-tour-category'),
-    path('tours/<int:pk>/remove_tour_category/<int:tour_category>/',
-         TourView.as_view({'get': 'remove_tour_category'}), name='tour-remove-tour-category')
 ]
