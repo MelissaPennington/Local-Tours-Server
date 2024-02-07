@@ -79,6 +79,12 @@ class TourView(ViewSet):
                 image=request.data["image"],
                 state=state,
             )
+            
+            if request.data['tourCategories']:
+                for category_id in request.data['tourCategories']:
+                    new_category = Category.objects.get(id=category_id)
+                    TourCategory.objects.create(tour=tour, category=new_category)
+                
             serializer = TourSerializer(tour)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except User.DoesNotExist:
@@ -100,6 +106,14 @@ class TourView(ViewSet):
             tour.address = request.data["address"]
             tour.image = request.data["image"]
             tour.state = state
+            
+            if request.data['tourCategories']:
+                existing_tour_categories = TourCategory.objects.all().filter(tour=tour)
+                for tour_category in existing_tour_categories:
+                    tour_category.delete()
+                for category_id in request.data['tourCategories']:
+                    new_category = Category.objects.get(id=category_id)
+                    TourCategory.objects.create(tour=tour, category=new_category)
 
             tour.save()
 
