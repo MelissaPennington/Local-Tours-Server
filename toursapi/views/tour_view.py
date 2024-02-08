@@ -3,7 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import action
-from toursapi.models import Tour, User, Category, TourCategory, State
+from toursapi.models import Tour, User, Category, TourCategory, State, Comment
 from toursapi.views.user_view import UserSerializer
 # from tourspapi.views.tour_category_view import TourCategorySerializer
 
@@ -174,6 +174,21 @@ class TourView(ViewSet):
             
         except TourCategory.DoesNotExist:
             return Response({'error': 'tour category not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+    @action(methods=['post'], detail=True)
+    def add_tour_comment(self, request, pk):
+        try:
+            tour = Tour.objects.get(pk=pk)
+            Comment.objects.create(
+                tour=tour,
+                content=request.data['content']
+            )
+            return Response(None, status=status.HTTP_201_CREATED)
+        
+        except:
+            return Response({'error': 'comment could\'t be added'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+    
 
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for categories"""
