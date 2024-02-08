@@ -136,7 +136,6 @@ class TourView(ViewSet):
         except Exception as e:
             return Response({'message': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
     # Add & Remove tour category
 
     @action(methods=['post'], detail=True)
@@ -188,7 +187,7 @@ class TourSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Tour
-        fields = ('id', 'categories', 'user', 'name', 'description', 'price', 'address', 'image', 'state')
+        fields = ('id', 'categories', 'user', 'name', 'description', 'price', 'address', 'image', 'state', 'comments')
         depth = 1
     
     def get_categories(self, obj):
@@ -200,4 +199,5 @@ class TourSerializer(serializers.ModelSerializer):
             return serializer.data
         else:
             return []
+        
         

@@ -1,0 +1,18 @@
+[
+    {
+        "model": "toursapi.comment",
+        "pk": 1,
+        "fields": {
+            "tour": 1,
+            "content": "this is a great tour. we love it so much"
+        }
+    },
+    {
+      "model": "toursapi.comment",
+      "pk": 2,
+      "fields": {
+          "tour": 1,
+          "content": "another amazing tour!!! yay!!!"
+      }
+  }
+]
